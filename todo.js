@@ -6,10 +6,17 @@ function get_todos() {
     }
     return todos;
 }
- 
+ let cnt=1;
+ var da;
 function add() {
-    var task = document.getElementById('task').value;
- 
+    var task = new Date();
+    task = task.toLocaleString();
+    task+='<td>';
+    da = document.getElementById('task').value;
+    
+
+    task+=da;
+    task+='</td>';
     var todos = get_todos();
     todos.push(task);
     localStorage.setItem('todo', JSON.stringify(todos));
@@ -33,11 +40,16 @@ function remove() {
 function show() {
     var todos = get_todos();
  
-    var html = '<ul>';
+    var html = '<table class="table table-striped table-bordered table-hover">';
+    html+='<tr><th>S.No</th><th>Date & Time </th><th>Saved Work ToDo</th><th>Done</th></tr>';
+
+
+    
     for(var i=0; i<todos.length; i++) {
-        html += '<li>' + todos[i] +" " + '<button class="close" data-dismiss="alert" id="' + i  + '">X</button></li>';
+        var x=i+1;
+        html += '<tr><td>'+x+'</td><td>' + todos[i] +" " + '</td><td><button class="close" data-dismiss="alert" id="' + i  + '">X</button></td></tr>';
     };
-    html += '</ul>';
+    html += '</table>';
  
     document.getElementById('todos').innerHTML = html;
     document.getElementById('tr').innerHTML = i ;
@@ -46,8 +58,24 @@ function show() {
     for (var i=0; i < buttons.length; i++) {
         buttons[i].addEventListener('click', remove);
     };
+
 }
  
+
 document.getElementById('add').addEventListener('click', add);
 show();
 
+function IsEmpty() {
+
+    if (document.getElementById('task').value == "") {
+        var khali = '<button class="btn btn-primary" disabled="disabled" style="width:100%;" id="add">Add</button>';
+        document.getElementById("add").innerHTML = khali;
+    }
+    else {
+        var not = '<button class="btn btn-primary" style="width:100%;" id="add">Add</button>';
+        document.getElementById('add').innerHTML = not;
+
+    }
+
+
+}
