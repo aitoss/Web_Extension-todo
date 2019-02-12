@@ -9,6 +9,23 @@ min-width: 800px;
 </style>
 </head>
 <body>
+  <script>
+    function IsEmpty(){
+
+      if(document.getElementById('task').value=="")
+        {
+          var khali = '<button class="btn btn-primary" disabled="disabled" style="width:100%;" id="add">Add</button>';
+          document.getElementById("add").innerHTML = khali;
+        }
+        else {
+          var not = '<button class="btn btn-primary" style="width:100%;" id="add">Add</button>';
+          document.getElementById('add').innerHTML = not;
+
+        }
+        
+      
+    }
+    </script>
   <div class="main-div">
     <div class="container" style="margin-top:40px;">
 
@@ -22,9 +39,11 @@ min-width: 800px;
         style="font-size:20px;"></span></button>
   </li><br>
 <div><br></div>
-   <input class="form-control" placeholder="Type text here" id="task"><div><br></div>
+   <input class="form-control" placeholder="Type text here" id="task" onclick="IsEmpty();"><div><br></div>
   <div id="todos"></div><hr>
-<button class="btn btn-primary" id="add">Add</button>
+  <div id='add'>
+<button class="btn btn-primary" disabled="disabled" style="width:100%;" id="add">Add</button>
+</div>
     </div>
 
 </form>

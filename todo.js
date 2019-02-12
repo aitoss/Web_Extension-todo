@@ -6,11 +6,13 @@ function get_todos() {
     }
     return todos;
 }
- 
+ let cnt=1;
+ var da;
 function add() {
     var task = new Date();
     task+='<td>';
-    var da = document.getElementById('task').value;
+    da = document.getElementById('task').value;
+    
     task+=da;
     task+='</td>';
     var todos = get_todos();
@@ -38,6 +40,9 @@ function show() {
  
     var html = '<table class="table table-striped table-bordered table-hover">';
     html+='<tr><th>S.No</th><th>Date & Time </th><th>Saved Work ToDo</th><th>Done</th></tr>';
+
+
+    
     for(var i=0; i<todos.length; i++) {
         var x=i+1;
         html += '<tr><td>'+x+'</td><td>' + todos[i] +" " + '</td><td><button class="close" data-dismiss="alert" id="' + i  + '">X</button></td></tr>';
@@ -51,6 +56,7 @@ function show() {
     for (var i=0; i < buttons.length; i++) {
         buttons[i].addEventListener('click', remove);
     };
+
 }
  
 document.getElementById('add').addEventListener('click', add);
