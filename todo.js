@@ -10,9 +10,11 @@ function get_todos() {
  var da;
 function add() {
     var task = new Date();
+    task = task.toLocaleString();
     task+='<td>';
     da = document.getElementById('task').value;
     
+
     task+=da;
     task+='</td>';
     var todos = get_todos();
@@ -59,6 +61,21 @@ function show() {
 
 }
  
+
 document.getElementById('add').addEventListener('click', add);
 show();
 
+function IsEmpty() {
+
+    if (document.getElementById('task').value == "") {
+        var khali = '<button class="btn btn-primary" disabled="disabled" style="width:100%;" id="add">Add</button>';
+        document.getElementById("add").innerHTML = khali;
+    }
+    else {
+        var not = '<button class="btn btn-primary" style="width:100%;" id="add">Add</button>';
+        document.getElementById('add').innerHTML = not;
+
+    }
+
+
+}
