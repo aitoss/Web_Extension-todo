@@ -8,8 +8,11 @@ function get_todos() {
 }
  
 function add() {
-    var task = document.getElementById('task').value;
- 
+    var task = new Date();
+    task+='<td>';
+    var da = document.getElementById('task').value;
+    task+=da;
+    task+='</td>';
     var todos = get_todos();
     todos.push(task);
     localStorage.setItem('todo', JSON.stringify(todos));
@@ -33,11 +36,13 @@ function remove() {
 function show() {
     var todos = get_todos();
  
-    var html = '<ul>';
+    var html = '<table class="table table-striped table-bordered table-hover">';
+    html+='<tr><th>S.No</th><th>Date & Time </th><th>Saved Work ToDo</th><th>Done</th></tr>';
     for(var i=0; i<todos.length; i++) {
-        html += '<li>' + todos[i] +" " + '<button class="close" data-dismiss="alert" id="' + i  + '">X</button></li>';
+        var x=i+1;
+        html += '<tr><td>'+x+'</td><td>' + todos[i] +" " + '</td><td><button class="close" data-dismiss="alert" id="' + i  + '">X</button></td></tr>';
     };
-    html += '</ul>';
+    html += '</table>';
  
     document.getElementById('todos').innerHTML = html;
     document.getElementById('tr').innerHTML = i ;
