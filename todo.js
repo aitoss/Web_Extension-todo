@@ -9,6 +9,7 @@ function get_todos() {
  
 function add() {
     var task = new Date();
+    task = task.toLocaleString();
     task+='<td>';
     var da = document.getElementById('task').value;
     task+=da;
