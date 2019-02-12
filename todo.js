@@ -35,13 +35,14 @@ function show() {
  
     var html = '<ul>';
     for(var i=0; i<todos.length; i++) {
-        html += '<li>' + todos[i] +" " + '<button class="remove" id="' + i  + '">X</button></li>';
+        html += '<li>' + todos[i] +" " + '<button class="close" data-dismiss="alert" id="' + i  + '">X</button></li>';
     };
     html += '</ul>';
  
     document.getElementById('todos').innerHTML = html;
+    document.getElementById('tr').innerHTML = i ;
  
-    var buttons = document.getElementsByClassName('remove');
+    var buttons = document.getElementsByClassName('close');
     for (var i=0; i < buttons.length; i++) {
         buttons[i].addEventListener('click', remove);
     };
