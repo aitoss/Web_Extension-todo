@@ -6,17 +6,25 @@ function get_todos() {
     }
     return todos;
 }
- let cnt=1;
- var da;
+
+
+ 
 function add() {
-    var task = new Date();
-    task = task.toLocaleString();
+    var task = document.getElementById('task').value;
     task+='<td>';
-    da = document.getElementById('task').value;
+    var d=new Date();    //date and time will be added by this object
+    var date=d.toLocaleDateString();
+    task+=date;
+    task+='</td>';
+
+
+    task+='<td>';
+    var time=d.toLocaleTimeString();
+    task+=time;
+    task+='</td>';
+
     
 
-    task+=da;
-    task+='</td>';
     var todos = get_todos();
     todos.push(task);
     localStorage.setItem('todo', JSON.stringify(todos));
@@ -25,7 +33,24 @@ function add() {
  
     return false;
 }
- 
+// I want to disabled the add function when i don't write any thing in task
+  function Empty(){
+            var h='<button class="btn btn-primary" id="add" disabled="disabled" style="width:100%;">Add</button>';
+            var x='<button class="btn btn-primary" id="add" style="width:100%;">Add</button>'
+  
+            var text=document.getElementById('task').value; //taking the stored value
+            if(text=="")
+            {
+                document.getElementById("add").innerHTML=h;//adding the value of h into of id add
+            }
+            else
+            {
+                document.getElementById("add").innerHTML=x;
+            }
+
+        }
+
+
 function remove() {
     var id = this.getAttribute('id');
     var todos = get_todos();
@@ -39,43 +64,36 @@ function remove() {
  
 function show() {
     var todos = get_todos();
- 
-    var html = '<table class="table table-striped table-bordered table-hover">';
-    html+='<tr><th>S.No</th><th>Date & Time </th><th>Saved Work ToDo</th><th>Done</th></tr>';
-
-
     
+    var html = '<table class="table table-striped">';
+        html+='<tr> <th> Number </th>  <th>Task</th>  <th>Date</th> <th>Time</th> <th>Check</th></tr>';
     for(var i=0; i<todos.length; i++) {
-        var x=i+1;
-        html += '<tr><td>'+x+'</td><td>' + todos[i] +" " + '</td><td><button class="close" data-dismiss="alert" id="' + i  + '">X</button></td></tr>';
+        html += '<tr> <td>'+ (i+1) + " " + '</td> <td>'  + todos[i] + " "+ '</td><td> <input type="checkbox"  class="checkbox"  ></td> <td><button  class="remove" id="' + i  + '">&times;</button></td></tr> ';
     };
     html += '</table>';
+
+    html+='<span>';
+        document.getElementById('demo').innerHTML=i;
+        if(i>=3)
+        {
+         document.getElementById('total').innerHTML= '<button class="btn btn-danger " type="button"  style="padding:15px;" >Task Remaining <span class="badge" id="demo" >'+i+'</span></button>'   
+        }
+        else
+        {
+          document.getElementById('total').innerHTML= '<button class="btn btn-primary " type="button" style="padding:15px;" >Task Remaining <span class="badge" id="demo" >'+i+'</span></button>'  
+        }
+    html+='</span>';    
  
+    
+
     document.getElementById('todos').innerHTML = html;
-    document.getElementById('tr').innerHTML = i ;
  
-    var buttons = document.getElementsByClassName('close');
+    var buttons = document.getElementsByClassName('remove');
     for (var i=0; i < buttons.length; i++) {
         buttons[i].addEventListener('click', remove);
     };
-
 }
  
-
 document.getElementById('add').addEventListener('click', add);
 show();
 
-function IsEmpty() {
-
-    if (document.getElementById('task').value == "") {
-        var khali = '<button class="btn btn-primary" disabled="disabled" style="width:100%;" id="add">Add</button>';
-        document.getElementById("add").innerHTML = khali;
-    }
-    else {
-        var not = '<button class="btn btn-primary" style="width:100%;" id="add">Add</button>';
-        document.getElementById('add').innerHTML = not;
-
-    }
-
-
-}
